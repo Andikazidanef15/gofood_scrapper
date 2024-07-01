@@ -17,6 +17,9 @@ class GofoodScrapper:
         # Configure Chrome options to use the proxy server
         chrome_options = Options()
 
+        # Add headless option
+        chrome_options.add_argument("--headless")
+
         # Path to your ChromeDriver
         self.driver = webdriver.Chrome(options=chrome_options)
     
