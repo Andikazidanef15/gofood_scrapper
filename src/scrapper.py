@@ -93,22 +93,6 @@ class GofoodScrapper:
         # Convert to pandas dataframe
         restaurant_metadata = pd.DataFrame(restaurant_metadata)
 
-        # Exclude Ismaya/Legit brands
-        ismaya_brands = [
-            'Osteria GIA', 'Social House', 'Djournal', 'Pizza E Birra',
-            'Kitchenette', 'Social Garden', 'A/A', 'Mr Fox', 'Skye',
-            'Sushi Groove', 'Manarai', 'Semaja', 'Naaga', 'Flor',
-            'Haraku Ramen', 'Kissa', 'Markette', 'BAKU', 'TPC', 
-            'Tokyo Belly', 'DF Kitchen'
-        ]
-        legit_brands = [
-            'Sei Tan', 'Sek Fan', 'Pastaria', 'Ryujin'
-        ]
-
-        brand_pattern = '|'.join(ismaya_brands + legit_brands)
-        restaurant_metadata['is_ismaya_legit'] = restaurant_metadata['name'].apply(lambda name: True if re.match(brand_pattern, name) else False)
-        restaurant_metadata = restaurant_metadata[restaurant_metadata['is_ismaya_legit'] == False]
-        
         return restaurant_metadata
 
     def get_menu_metadata(self, resto_id:str, id_to_link:dict):
